@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	ObjectManager objectmanager;
 
 	GamePanel(ObjectManager object) {
-		timer = new Timer(1000 / 60, this);
+		timer = new Timer(1000 / 40, this);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		segment = new Segment(0, 0, 10, 10);
 		objectmanager = object;
@@ -60,7 +60,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		graphics.setColor(Color.BLACK);
 		graphics.setColor(Color.RED);
 		graphics.setFont(titleFont);
-		graphics.drawString("Battle Snake ", 900, 200);
+		graphics.drawString("Caduceus", 900, 200);
 		graphics.drawString("press enter to play", 850, 400);
 
 	}
@@ -164,7 +164,26 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 
 		}
+		if (e.getKeyCode() == KeyEvent.VK_W) {
+			if (!objectmanager.getdirection2().equals("down")) {
+				objectmanager.setdirection2("up");
+			}
+		} else if (e.getKeyCode() == KeyEvent.VK_S) {
+			if (!objectmanager.getdirection2().equals("up")) {
+				objectmanager.setdirection2("down");
+			}
 
+		} else if (e.getKeyCode() == KeyEvent.VK_A) {
+			if (!objectmanager.getdirection2().equals("right")) {
+				objectmanager.setdirection2("left");
+			}
+
+		} else if (e.getKeyCode() == KeyEvent.VK_D) {
+			if (!objectmanager.getdirection2().equals("left")) {
+				objectmanager.setdirection2("right");
+			}
+
+		}
 	}
 
 	@Override
