@@ -6,8 +6,9 @@ import java.util.Random;
 
 public class ObjectManager {
 	Segment head;
-
+	ArrayList<Segment> tailArray = new ArrayList<Segment>();
 	String direction = "down";
+	int lives = 7;
 
 	ObjectManager() {
 		head = new Segment(50, 50, 10, 10);
@@ -17,18 +18,22 @@ public class ObjectManager {
 		direction = value;
 
 	}
+
 	public String getdirection() {
 		return this.direction;
 	}
+
 	void update() {
 		move();
 		head.update();
+
 	}
 
 	void draw(Graphics graphics) {
 		graphics.setColor(Color.BLACK);
 		graphics.fillRect(0, 0, Snake.WIDTH, Snake.HEIGHT);
 		head.draw(graphics);
+		
 	}
 
 	void move() {
@@ -49,6 +54,24 @@ public class ObjectManager {
 
 			break;
 		}
+	}
+
+	void drawTail(Graphics g) {
+		// Draw a 10 by 10 rectangle for each Segment in your snake ArrayList.
+		for (Segment ta : tailArray) {
+			g.drawRect(ta.getX(), ta.getY(), 10, 10);
+		}
+
+	}
+
+	void manageTail() {
+
+		tailArray.add(new Segment(head.getX(), head.getY(), 10, 10));
+
+		while (tailArray.size() > lives) {
+			tailArray.remove(0);
+		}
+
 	}
 
 	void purgeObjects() {

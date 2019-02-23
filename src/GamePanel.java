@@ -56,12 +56,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawMenuState(Graphics graphics) {
-		graphics.setColor(Color.BLACK);
 		graphics.fillRect(0, 0, WIDTH, HEIGHT);
-		graphics.setColor(Color.YELLOW);
+		graphics.setColor(Color.BLACK);
+		graphics.setColor(Color.RED);
 		graphics.setFont(titleFont);
-		graphics.drawString("Battle Snake ", 80, 100);
-		graphics.drawString("press enter to play", 60, 400);
+		graphics.drawString("Battle Snake ", 900, 200);
+		graphics.drawString("press enter to play", 850, 400);
 
 	}
 
@@ -152,17 +152,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			if (!objectmanager.getdirection().equals("up")) {
 				objectmanager.setdirection("down");
 			}
-			
+
 		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			if (!objectmanager.getdirection().equals("right")) {
 				objectmanager.setdirection("left");
 			}
-			
+
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			if (!objectmanager.getdirection().equals("left")) {
 				objectmanager.setdirection("right");
 			}
-			
+
 		}
 
 	}
