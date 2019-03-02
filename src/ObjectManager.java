@@ -11,9 +11,20 @@ public class ObjectManager {
 	String direction = "down";
 	int lives = 14;
 	String direction2= "down2";
-	ObjectManager() {
+	int foodW = 40;
+	 int foodL = 40;
+	 Random rand = new Random();
+		int xLocation = rand.nextInt(801-40);
+		int yLocation = rand.nextInt(801-40);
+		Random rand2 = new Random();
+		int xLocation2 = rand2.nextInt(801-40);
+		int yLocation2 = rand2.nextInt(801-40);
+		int scoreP1=0;
+		int scoreP2=0;
+		ObjectManager() {
 		head = new Segment(50, 50, 30, 30);
 		head2 = new Segment(50,50,30,30);
+		
 	}
 
 	public void setdirection(String value) {
@@ -33,11 +44,10 @@ public class ObjectManager {
 	}
 	void update() {
 		move();
-		move2();
 		head.update();
 		head2.update();
 		manageTail();
-	
+		
 	}
 
 	void draw(Graphics graphics) {
@@ -45,47 +55,47 @@ public class ObjectManager {
 		graphics.fillRect(0, 0, Snake.WIDTH, Snake.HEIGHT);
 		head.draw(graphics);
 		drawTail(graphics);
+		drawFood(graphics);
+		drawFood2(graphics);
 	}
 
 	void move() {
+		int vel=20;
+		int xVel=0;
+		int yVel=0;
 		switch (direction) {
 		case "up":
-			head.setY(head.getY() - 30);
+			yVel-=vel;
 			break;
 		case "down":
-			head.setY(head.getY() + 30);
-
+			yVel+=vel;
 			break;
 		case "left":
-			head.setX(head.getX() - 30);
-
+			xVel-=vel;
 			break;
 		case "right":
-			head.setX(head.getX() + 30);
-
+			xVel+=vel;
 			break;
 		}
-	}
-	void move2() {
 		switch (direction2) {
 		case "up":
-			head.setY(head.getY() - 30);
+			yVel-=vel;
 			break;
 		case "down":
-			head.setY(head.getY() + 30);
-
+			yVel+=vel;
 			break;
 		case "left":
-			head.setX(head.getX() - 30);
-
+			xVel-=vel;
 			break;
 		case "right":
-			head.setX(head.getX() + 30);
-
+			xVel+=vel;
 			break;
 		}
+	head.setX(head.getX()+xVel);
+	head.setY(head.getY()+yVel);
 	}
-
+	
+	
 	void drawTail(Graphics g) {
 		// Draw a 10 by 10 rectangle for each Segment in your snake ArrayList.
 		for (Segment ta : tailArray) {
@@ -93,7 +103,15 @@ public class ObjectManager {
 		}
 
 	}
-
+	void drawFood(Graphics g) {
+		g.setColor(Color.RED);
+		g.fillRect(xLocation, yLocation, foodL, foodW);
+	}
+	void drawFood2(Graphics g) {
+		g.setColor(Color.BLUE);
+		g.fillRect(xLocation2, yLocation2, foodL, foodW);
+	}
+	
 	void manageTail() {
 
 		tailArray.add(new Segment(head.getX(), head.getY(), 30, 30));
@@ -112,16 +130,17 @@ public class ObjectManager {
 	}
 
 	void checkCollision() {
-		/*
-		 * for(Aliens a: this.aliens){
-		 * 
-		 * if(rocket.collisionBox.intersects(a.collisionBox)){
-		 * 
-		 * rocket.isAlive = false; } for (Projectile p : projectile) { if
-		 * (a.collisionBox.intersects(p.collisionBox)) { a.isAlive = false; p.isAlive =
-		 * false; } } }
-		 */
-
+		
+		 if (xLocation==head.x && yLocation==head.y) {
+			scoreP1++;
+			 xLocation = rand2.nextInt(801-40);
+			 yLocation = rand2.nextInt(801-40);
+		}
+		 if (xLocation2==head.x && yLocation2==head.y) {
+				scoreP2++;
+				 xLocation2 = rand2.nextInt(801-40);
+				 yLocation2 = rand2.nextInt(801-40);
+	}
 	}
 	// public int getscore() {
 	// return score;

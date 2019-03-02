@@ -56,8 +56,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawMenuState(Graphics graphics) {
-		graphics.fillRect(0, 0, WIDTH, HEIGHT);
 		graphics.setColor(Color.BLACK);
+		graphics.fillRect(0, 0, WIDTH, HEIGHT);	
 		graphics.setColor(Color.RED);
 		graphics.setFont(titleFont);
 		graphics.drawString("Caduceus", 900, 200);

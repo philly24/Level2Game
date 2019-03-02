@@ -37,7 +37,7 @@ public class Segment extends GameObject {
 	}
 
 	void draw(Graphics graphics) {
-		graphics.setColor(Color.RED);
+		graphics.setColor(Color.WHITE);
 		graphics.fillRect(x, y, width, height);
 	}
 
