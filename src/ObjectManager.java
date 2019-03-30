@@ -15,11 +15,11 @@ public class ObjectManager {
 	int foodW = 40;
 	int foodL = 40;
 	Random rand = new Random();
-	int xLocation = rand.nextInt(801 - 40);
-	int yLocation = rand.nextInt(801 - 40);
+	int xLocation = rand.nextInt(1960);
+	int yLocation = rand.nextInt(860) + 100;
 	Random rand2 = new Random();
-	int xLocation2 = rand2.nextInt(801 - 40);
-	int yLocation2 = rand2.nextInt(801 - 40);
+	int xLocation2 = rand2.nextInt(1960);
+	int yLocation2 = rand2.nextInt(860) + 100;
 	int scoreP1 = 0;
 	int scoreP2 = 0;
 	int headWidth = 30;
@@ -62,6 +62,12 @@ public class ObjectManager {
 		drawTail(graphics);
 		drawFood(graphics);
 		drawFood2(graphics);
+		scoreBoard(graphics);
+	}
+
+	void scoreBoard(Graphics g) {
+		g.setColor(Color.GRAY);
+		g.drawRect(0, 0, 2000, 100);
 	}
 
 	void move() {
@@ -137,18 +143,19 @@ public class ObjectManager {
 
 	void checkCollision() {
 
-		if (head.x < xLocation + foodW && head.x > xLocation- headWidth && head.y < yLocation + foodL
+		if (head.x < xLocation + foodW && head.x > xLocation - headWidth && head.y < yLocation + foodL
 				&& head.y > yLocation - headLenght) {
 			redScore++;
-			xLocation = rand.nextInt(801 - 40);
-			yLocation = rand.nextInt(801 - 40);
+			xLocation = rand.nextInt(1960);
+			yLocation = rand.nextInt(860) + 100;
 
 		}
 
-		if (head.x < xLocation2 + foodW && head.x > xLocation2- headWidth && head.y < yLocation2 + foodL && head.y > yLocation2 - headLenght) {
+		if (head.x < xLocation2 + foodW && head.x > xLocation2 - headWidth && head.y < yLocation2 + foodL
+				&& head.y > yLocation2 - headLenght) {
 			blueScore++;
-			xLocation2 = rand2.nextInt(801 - 40);
-			yLocation2 = rand2.nextInt(801 - 40);
+			xLocation2 = rand2.nextInt(1960);
+			yLocation2 = rand2.nextInt(860) + 100;
 
 		}
 

@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 
 public class Snake {
 	JFrame frame;
-	static final int WIDTH = 2000;
+	static final int WIDTH = 1920;
 	static final int HEIGHT = 1000;
 	GamePanel gamepanel;
 

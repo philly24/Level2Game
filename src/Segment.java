@@ -23,15 +23,15 @@ public class Segment extends GameObject {
 			x = 0;
 		}
 		if (x < 0) {
-			// print("X < 0 - out of bounds\n");
+		
 			x = Snake.WIDTH;
 		}
 		if (y > Snake.HEIGHT) {
-			// print("Y > 500 - out of bounds\n");
-			y = 0;
+			
+			y = 100;
 		}
-		if (y < 0) {
-			// print("Y < 0 - out of bounds\n");
+		if (y < 100) {
+			
 			y = Snake.HEIGHT;
 		}
 	}
