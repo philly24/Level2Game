@@ -3,7 +3,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
+import java.applet.Applet;
 
+import java.awt.*;
 public class ObjectManager {
 	Segment head;
 	int blueScore = 0;
@@ -66,8 +68,12 @@ public class ObjectManager {
 	}
 
 	void scoreBoard(Graphics g) {
+		String blue= "BLUE SCORE "+blueScore;
 		g.setColor(Color.GRAY);
 		g.drawRect(0, 0, 2000, 100);
+		g.drawRect(0, 0, 980, 100);
+	
+		g.drawString(blue, 490, 50);
 	}
 
 	void move() {
@@ -146,16 +152,16 @@ public class ObjectManager {
 		if (head.x < xLocation + foodW && head.x > xLocation - headWidth && head.y < yLocation + foodL
 				&& head.y > yLocation - headLenght) {
 			redScore++;
-			xLocation = rand.nextInt(1960);
-			yLocation = rand.nextInt(860) + 100;
+			xLocation = rand.nextInt(1850);
+			yLocation = rand.nextInt(800) + 100;
 
 		}
 
 		if (head.x < xLocation2 + foodW && head.x > xLocation2 - headWidth && head.y < yLocation2 + foodL
 				&& head.y > yLocation2 - headLenght) {
 			blueScore++;
-			xLocation2 = rand2.nextInt(1960);
-			yLocation2 = rand2.nextInt(860) + 100;
+			xLocation2 = rand2.nextInt(1850);
+			yLocation2 = rand2.nextInt(800) + 100;
 
 		}
 

@@ -26,13 +26,13 @@ public class Segment extends GameObject {
 		
 			x = Snake.WIDTH;
 		}
-		if (y > Snake.HEIGHT) {
+		if (y >= Snake.HEIGHT) {
 			
 			y = 100;
 		}
 		if (y < 100) {
 			
-			y = Snake.HEIGHT;
+			y = Snake.HEIGHT-height;
 		}
 	}
 
