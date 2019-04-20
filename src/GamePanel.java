@@ -49,7 +49,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			currentState = END_STATE;
 		}
 	}
-
+	
 	void updateEndState() {
 		// ends the game and restarts it
 

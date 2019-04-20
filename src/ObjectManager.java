@@ -1,6 +1,4 @@
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 import java.applet.Applet;
@@ -8,8 +6,8 @@ import java.applet.Applet;
 import java.awt.*;
 public class ObjectManager {
 	Segment head;
-	int blueScore = 0;
-	int redScore = 0;
+	int blueScore = 100;
+	int redScore = 100;
 	ArrayList<Segment> tailArray = new ArrayList<Segment>();
 	String direction = "down";
 	int lives = 14;
@@ -22,14 +20,14 @@ public class ObjectManager {
 	Random rand2 = new Random();
 	int xLocation2 = rand2.nextInt(1960);
 	int yLocation2 = rand2.nextInt(860) + 100;
-	int scoreP1 = 0;
-	int scoreP2 = 0;
 	int headWidth = 30;
 	int headLenght = 30;
-
+	int frameCount = 0;
+	Font Font;
 	ObjectManager() {
 		head = new Segment(50, 50, headWidth, headLenght);
-
+		 Font = new Font("Arial", Font.PLAIN, 30);
+		
 	}
 
 	public void setdirection(String value) {
@@ -55,6 +53,11 @@ public class ObjectManager {
 		head.update();
 		manageTail();
 		checkCollision();
+		frameCount++;
+		if (frameCount % 40 == 0) {
+			blueScore--;
+			redScore--;
+		}
 	}
 
 	void draw(Graphics graphics) {
@@ -65,15 +68,23 @@ public class ObjectManager {
 		drawFood(graphics);
 		drawFood2(graphics);
 		scoreBoard(graphics);
+		Arrows(graphics);
 	}
 
 	void scoreBoard(Graphics g) {
+		g.setFont(Font);
+		g.setColor(Color.BLUE);
 		String blue= "BLUE SCORE "+blueScore;
+		g.drawString(blue, 160, 50);
 		g.setColor(Color.GRAY);
 		g.drawRect(0, 0, 2000, 100);
 		g.drawRect(0, 0, 980, 100);
-	
-		g.drawString(blue, 490, 50);
+		g.setColor(Color.RED);
+		String red = "RED SCORE " + redScore;  
+		g.drawString(red, 1570, 50);
+	}
+	void Arrows(Graphics g) {
+		
 	}
 
 	void move() {
@@ -151,20 +162,28 @@ public class ObjectManager {
 
 		if (head.x < xLocation + foodW && head.x > xLocation - headWidth && head.y < yLocation + foodL
 				&& head.y > yLocation - headLenght) {
-			redScore++;
+			redScore+=2;
 			xLocation = rand.nextInt(1850);
-			yLocation = rand.nextInt(800) + 100;
+			yLocation = rand.nextInt(750) + 100;
 
 		}
 
 		if (head.x < xLocation2 + foodW && head.x > xLocation2 - headWidth && head.y < yLocation2 + foodL
 				&& head.y > yLocation2 - headLenght) {
-			blueScore++;
+			blueScore+=2;
 			xLocation2 = rand2.nextInt(1850);
-			yLocation2 = rand2.nextInt(800) + 100;
+			yLocation2 = rand2.nextInt(750) + 100;
 
 		}
 
+	}
+	void endGame() {
+		if (redScore==0 ) {
+			
+		}
+		if (blueScore==0) {
+			
+		}
 	}
 
 	public int getScoreBlue() {
