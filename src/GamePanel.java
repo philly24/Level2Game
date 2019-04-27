@@ -20,12 +20,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	Font titleFont;
 	Segment segment;
-	final int MENU_STATE = 0;
+	final static int MENU_STATE = 0;
 
 	final int GAME_STATE = 1;
 
-	final int END_STATE = 2;
-	int currentState = MENU_STATE;
+	final static int END_STATE = 2;
+	static int currentState = MENU_STATE;
+	static int loser;
 	ObjectManager objectmanager;
 
 	GamePanel(ObjectManager object) {
@@ -33,6 +34,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		segment = new Segment(0, 0, 10, 10);
 		objectmanager = object;
+		
 	}
 
 	void updateMenuState() {

@@ -23,6 +23,7 @@ public class ObjectManager {
 	int headWidth = 30;
 	int headLenght = 30;
 	int frameCount = 0;
+	
 	Font Font;
 	ObjectManager() {
 		head = new Segment(50, 50, headWidth, headLenght);
@@ -122,7 +123,7 @@ public class ObjectManager {
 		head.setX(head.getX() + xVel);
 		head.setY(head.getY() + yVel);
 	}
-
+	
 	void drawTail(Graphics g) {
 		// Draw a 10 by 10 rectangle for each Segment in your snake ArrayList.
 		for (Segment ta : tailArray) {
@@ -178,11 +179,13 @@ public class ObjectManager {
 
 	}
 	void endGame() {
-		if (redScore==0 ) {
-			
+		if (redScore <= 0 ) {
+			GamePanel.currentState = GamePanel.END_STATE;
+			GamePanel.loser = 2;	
 		}
-		if (blueScore==0) {
-			
+		if (blueScore <= 0) {
+			GamePanel.currentState = GamePanel.END_STATE;
+			GamePanel.loser = 2;
 		}
 	}
 
