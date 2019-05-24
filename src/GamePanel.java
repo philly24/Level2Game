@@ -27,6 +27,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final static int END_STATE = 2;
 	static int currentState = MENU_STATE;
 	static int loser;
+	static String winner;
 	ObjectManager objectmanager;
 
 	GamePanel(ObjectManager object) {
@@ -34,36 +35,35 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		segment = new Segment(0, 0, 10, 10);
 		objectmanager = object;
-		
+
 	}
 
 	void updateMenuState() {
-		// tells the code when in menu state
+
 	}
 
 	void updateGameState() {
-		// checks for collisions and updates it
+
 		objectmanager.update();
 
 		objectmanager.checkCollision();
 		objectmanager.purgeObjects();
-		if (segment.isAlive == false) {
+		if (loser == 3) {
 			currentState = END_STATE;
 		}
 	}
-	
+
 	void updateEndState() {
-		// ends the game and restarts it
 
 	}
 
 	void drawMenuState(Graphics graphics) {
 		graphics.setColor(Color.BLACK);
-		graphics.fillRect(0, 0, WIDTH, HEIGHT);	
+		graphics.fillRect(0, 0, Snake.WIDTH, Snake.HEIGHT);
 		graphics.setColor(Color.RED);
 		graphics.setFont(titleFont);
-		graphics.drawString("Caduceus", 900, 200);
-		graphics.drawString("press enter to play", 850, 400);
+		graphics.drawString("Caduceus", 600, 200);
+		graphics.drawString("press enter to play", 520, 400);
 
 	}
 
@@ -73,10 +73,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void drawEndState(Graphics graphics) {
 		graphics.setColor(Color.RED);
-		graphics.fillRect(0, 0, WIDTH, HEIGHT);
-		graphics.setFont(titleFont);
+		graphics.fillRect(0, 0, Snake.WIDTH, Snake.HEIGHT);
 		graphics.setColor(Color.BLACK);
-		graphics.drawString("Player # wins", 80, 80);
+		graphics.setFont(titleFont);
+		graphics.drawString(winner + " WINS", 600, 300);
 
 	}
 
@@ -127,14 +127,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 		if (e.getKeyChar() == KeyEvent.VK_ENTER) {
 
+			currentState++;
+
 			if (currentState > END_STATE) {
 
 				currentState = MENU_STATE;
 
-			} else if (currentState == END_STATE) {
-
-			} else {
-				currentState++;
 			}
 
 		}

@@ -2,12 +2,15 @@
 import java.util.ArrayList;
 import java.util.Random;
 import java.applet.Applet;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import java.awt.*;
+
 public class ObjectManager {
 	Segment head;
-	int blueScore = 100;
-	int redScore = 100;
+	int blueScore = 10;
+	int redScore = 10;
 	ArrayList<Segment> tailArray = new ArrayList<Segment>();
 	String direction = "down";
 	int lives = 14;
@@ -15,20 +18,21 @@ public class ObjectManager {
 	int foodW = 40;
 	int foodL = 40;
 	Random rand = new Random();
-	int xLocation = rand.nextInt(1960);
-	int yLocation = rand.nextInt(860) + 100;
+	int xLocation = rand.nextInt(1200);
+	int yLocation = rand.nextInt(750) + 100;
 	Random rand2 = new Random();
-	int xLocation2 = rand2.nextInt(1960);
-	int yLocation2 = rand2.nextInt(860) + 100;
+	int xLocation2 = rand2.nextInt(1200);
+	int yLocation2 = rand2.nextInt(750) + 100;
 	int headWidth = 30;
 	int headLenght = 30;
 	int frameCount = 0;
 	
 	Font Font;
+
 	ObjectManager() {
 		head = new Segment(50, 50, headWidth, headLenght);
-		 Font = new Font("Arial", Font.PLAIN, 30);
-		
+		Font = new Font("Arial", Font.PLAIN, 30);
+
 	}
 
 	public void setdirection(String value) {
@@ -59,6 +63,7 @@ public class ObjectManager {
 			blueScore--;
 			redScore--;
 		}
+		endGame();
 	}
 
 	void draw(Graphics graphics) {
@@ -69,23 +74,30 @@ public class ObjectManager {
 		drawFood(graphics);
 		drawFood2(graphics);
 		scoreBoard(graphics);
-		Arrows(graphics);
+		arrows(graphics);
+	}
+
+	void arrows(Graphics g) {
+		Image blueUp = Toolkit.getDefaultToolkit().getImage("blue up.png");
+		if (direction2.equals("up")) {
+			g.drawImage(blueUp, 250, 1, 33, 33, null);
+			/*g.drawImage("white down", 217, , , , )
+			g.drawImage("", , , , , )
+			g.drawImage("", , , , , )*/
+		}
 	}
 
 	void scoreBoard(Graphics g) {
 		g.setFont(Font);
 		g.setColor(Color.BLUE);
-		String blue= "BLUE SCORE "+blueScore;
-		g.drawString(blue, 160, 50);
+		String blue = "BLUE SCORE " + blueScore;
+		g.drawString(blue, 150, 50);
 		g.setColor(Color.GRAY);
-		g.drawRect(0, 0, 2000, 100);
-		g.drawRect(0, 0, 980, 100);
+		g.drawRect(0, 0, 1500, 100);
+		g.drawRect(0, 0, 750, 100);
 		g.setColor(Color.RED);
-		String red = "RED SCORE " + redScore;  
-		g.drawString(red, 1570, 50);
-	}
-	void Arrows(Graphics g) {
-		
+		String red = "RED SCORE " + redScore;
+		g.drawString(red, 1000, 50);
 	}
 
 	void move() {
@@ -123,7 +135,7 @@ public class ObjectManager {
 		head.setX(head.getX() + xVel);
 		head.setY(head.getY() + yVel);
 	}
-	
+
 	void drawTail(Graphics g) {
 		// Draw a 10 by 10 rectangle for each Segment in your snake ArrayList.
 		for (Segment ta : tailArray) {
@@ -163,29 +175,36 @@ public class ObjectManager {
 
 		if (head.x < xLocation + foodW && head.x > xLocation - headWidth && head.y < yLocation + foodL
 				&& head.y > yLocation - headLenght) {
-			redScore+=2;
-			xLocation = rand.nextInt(1850);
-			yLocation = rand.nextInt(750) + 100;
+			redScore += 2;
+			xLocation = rand.nextInt(1300);
+			yLocation = rand.nextInt(700) + 100;
 
 		}
 
 		if (head.x < xLocation2 + foodW && head.x > xLocation2 - headWidth && head.y < yLocation2 + foodL
 				&& head.y > yLocation2 - headLenght) {
-			blueScore+=2;
-			xLocation2 = rand2.nextInt(1850);
-			yLocation2 = rand2.nextInt(750) + 100;
+			blueScore += 2;
+			xLocation2 = rand2.nextInt(1300);
+			yLocation2 = rand2.nextInt(700) + 100;
 
 		}
 
 	}
+
 	void endGame() {
-		if (redScore <= 0 ) {
+		if (redScore <= 0 && blueScore > 0) {
 			GamePanel.currentState = GamePanel.END_STATE;
-			GamePanel.loser = 2;	
+			GamePanel.loser = 3;
+			GamePanel.winner = "BLUE";
 		}
-		if (blueScore <= 0) {
+		if (blueScore <= 0 && redScore > 0) {
 			GamePanel.currentState = GamePanel.END_STATE;
-			GamePanel.loser = 2;
+			GamePanel.loser = 3;
+			GamePanel.winner = "RED";
+		}
+		if (blueScore <= 0 && redScore <= 0) {
+			blueScore += 10;
+			redScore += 10;
 		}
 	}
 
