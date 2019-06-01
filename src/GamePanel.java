@@ -7,11 +7,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
@@ -28,14 +34,27 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	static int currentState = MENU_STATE;
 	static int loser;
 	static String winner;
+	BufferedImage cad;
 	ObjectManager objectmanager;
-
+	
+	GamePanel(){
+		String path = Paths.get("").toAbsolutePath().toString();
+		try {
+			
+			cad = ImageIO.read(new File(path+ "/src/Caduceus.png"));
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+	}
 	GamePanel(ObjectManager object) {
 		timer = new Timer(1000 / 40, this);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		segment = new Segment(0, 0, 10, 10);
 		objectmanager = object;
-
+		
 	}
 
 	void updateMenuState() {
@@ -47,9 +66,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		objectmanager.update();
 
 		objectmanager.checkCollision();
-		objectmanager.purgeObjects();
+
 		if (loser == 3) {
 			currentState = END_STATE;
+
 		}
 	}
 
@@ -62,9 +82,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		graphics.fillRect(0, 0, Snake.WIDTH, Snake.HEIGHT);
 		graphics.setColor(Color.RED);
 		graphics.setFont(titleFont);
-		graphics.drawString("Caduceus", 600, 200);
-		graphics.drawString("press enter to play", 520, 400);
-
+		graphics.drawString("Caduceus", 600, 100);
+		graphics.drawString("press enter to play", 520, 200);
+		graphics.drawString("press spacebar for instructions",400,300);
+		graphics.drawImage(cad,600,350,250,400,null);
 	}
 
 	void drawGameState(Graphics graphics) {
@@ -138,7 +159,23 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 
 		if (e.getKeyChar() == KeyEvent.VK_SPACE) {
+			String menu = "";
+			JFrame frame = new JFrame();
 
+			frame.setVisible(true);
+			frame.setDefaultCloseOperation(frame.getDefaultCloseOperation());
+			JPanel panel = new JPanel();	
+			frame.add(panel);
+			JTextArea text = new JTextArea(); 
+			JTextArea text2 = new JTextArea(); 
+			JTextArea text3 = new JTextArea(); 
+			text.setText("blue team controls snake with WASD keys ");
+			text2.setText("red team controls snake with arrow keys");
+			text3.setText("first one to run out of time loses");
+			panel.add(text);
+			panel.add(text2);
+			panel.add(text3);
+			frame.pack();
 		}
 	}
 
