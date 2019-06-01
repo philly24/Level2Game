@@ -57,7 +57,7 @@ public class ObjectManager {
 	Font Font;
 
 	ObjectManager() {
-		head = new Segment(50, 50, headWidth, headLenght);
+		head = new Segment(710, 385, headWidth, headLenght);
 		Font = new Font("Arial", Font.PLAIN, 30);
 		String path = Paths.get("").toAbsolutePath().toString();
 		try {
