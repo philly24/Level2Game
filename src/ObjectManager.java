@@ -15,12 +15,12 @@ import java.awt.*;
 
 public class ObjectManager {
 	Segment head;
-	int blueScore = 100;
-	int redScore = 100;
+	int blueScore = 10;
+	int redScore = 10;
 	ArrayList<Segment> tailArray = new ArrayList<Segment>();
 	String direction = "down";
 	int lives = 14;
-	String direction2 = "down2";
+	String direction2 = "up";
 	int foodW = 50;
 	int foodL = 50;
 	Random rand = new Random();
@@ -47,6 +47,8 @@ public class ObjectManager {
 	BufferedImage cad;
 	BufferedImage apple;
 	BufferedImage apple2;
+	BufferedImage trophy;
+	static BufferedImage Head;
 	int widthArrow = 30;
 	int heightArrow = 30;
 	int yUp = 1;
@@ -59,9 +61,11 @@ public class ObjectManager {
 		Font = new Font("Arial", Font.PLAIN, 30);
 		String path = Paths.get("").toAbsolutePath().toString();
 		try {
+			Head = ImageIO.read(new File(path+ "/src/snake head.png"));
 			apple = ImageIO.read(new File(path+ "/src/apple.png"));
 			apple2 = ImageIO.read(new File(path+ "/src/apple 2.png"));
 			cad = ImageIO.read(new File(path+ "/src/Caduceus.png"));
+			trophy = ImageIO.read(new File(path+ "/src/trophy.png"));
 			whiteUp = ImageIO.read(new File(path + "/src/whiteUp.png"));
 			whiteDown = ImageIO.read(new File(path + "/src/white down.png"));
 			whiteRight = ImageIO.read(new File(path + "/src/white right.png"));
@@ -219,7 +223,7 @@ public class ObjectManager {
 	}
 
 	void drawTail(Graphics g) {
-		// Draw a 10 by 10 rectangle for each Segment in your snake ArrayList.
+		
 		for (Segment ta : tailArray) {
 			g.drawRect(ta.getX(), ta.getY(), 30, 30);
 		}
@@ -227,14 +231,10 @@ public class ObjectManager {
 	}
 
 	void drawFood(Graphics g) {
-		//g.setColor(Color.RED);
-		//g.fillRect(xLocation, yLocation, foodL, foodW);
 		g.drawImage(apple, xLocation, yLocation, foodL, foodW, null);
 	}
 
 	void drawFood2(Graphics g) {
-		//g.setColor(Color.BLUE);
-		//g.fillRect(xLocation2, yLocation2, foodL, foodW);
 		g.drawImage(apple2, xLocation2, yLocation2, foodL, foodW, null);
 	}
 

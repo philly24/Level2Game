@@ -34,21 +34,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	static int currentState = MENU_STATE;
 	static int loser;
 	static String winner;
-	BufferedImage cad;
+	
 	ObjectManager objectmanager;
 	
-	GamePanel(){
-		String path = Paths.get("").toAbsolutePath().toString();
-		try {
-			
-			cad = ImageIO.read(new File(path+ "/src/Caduceus.png"));
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-			
-	}
+
 	GamePanel(ObjectManager object) {
 		timer = new Timer(1000 / 40, this);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
@@ -85,7 +74,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		graphics.drawString("Caduceus", 600, 100);
 		graphics.drawString("press enter to play", 520, 200);
 		graphics.drawString("press spacebar for instructions",400,300);
-		graphics.drawImage(cad,600,350,250,400,null);
+		graphics.drawImage(objectmanager.cad,600,350,250,400,null);
 	}
 
 	void drawGameState(Graphics graphics) {
@@ -97,8 +86,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		graphics.fillRect(0, 0, Snake.WIDTH, Snake.HEIGHT);
 		graphics.setColor(Color.BLACK);
 		graphics.setFont(titleFont);
-		graphics.drawString(winner + " WINS", 600, 300);
-
+		graphics.drawString(winner + " WINS", 600, 250);
+		graphics.drawImage(objectmanager.trophy,525,300,400,400,null);
 	}
 
 	public void actionPerformed(ActionEvent e) {
