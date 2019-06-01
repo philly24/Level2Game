@@ -82,13 +82,23 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawEndState(Graphics graphics) {
-		graphics.setColor(Color.RED);
-		graphics.fillRect(0, 0, Snake.WIDTH, Snake.HEIGHT);
 		graphics.setColor(Color.BLACK);
-		graphics.setFont(titleFont);
-		graphics.drawString(winner + " WINS", 600, 250);
-		graphics.drawImage(objectmanager.trophy,525,300,400,400,null);
+		graphics.fillRect(0, 0, Snake.WIDTH, Snake.HEIGHT);
+		if (winner.equalsIgnoreCase("blue")) {
+			graphics.setColor(Color.BLUE);
+			graphics.setFont(titleFont);
+			graphics.drawString(winner + " WINS", 600, 250);
+			graphics.drawImage(objectmanager.trophy,525,300,400,400,null);
+		}
+		else {
+			graphics.setColor(Color.RED);
+			graphics.setFont(titleFont);
+			graphics.drawString(winner + " WINS", 600, 250);
+			graphics.drawImage(objectmanager.trophy,525,300,400,400,null);
+		}
 	}
+		
+		
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

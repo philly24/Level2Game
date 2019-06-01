@@ -39,7 +39,7 @@ public class Segment extends GameObject {
 	void draw(Graphics graphics) {
 		graphics.setColor(Color.WHITE);
 		//graphics.fillRect(x, y, width, height);
-		graphics.drawImage(ObjectManager.Head, x, y,width,height, null);
+		graphics.drawImage(ObjectManager.Head, x, y, width, height, null);
 	}
 
 	int getX() {
