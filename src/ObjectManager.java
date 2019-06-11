@@ -15,8 +15,8 @@ import java.awt.*;
 
 public class ObjectManager {
 	Segment head;
-	int blueScore = 10;
-	int redScore = 10;
+	int blueScore = 100;
+	int redScore = 100;
 	ArrayList<Segment> tailArray = new ArrayList<Segment>();
 	String direction = "down";
 	int lives = 14;
